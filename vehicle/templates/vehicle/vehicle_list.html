@@ -1,0 +1,122 @@
+{% extends "vehicle/base.html" %}
+
+{% block content %}
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid justify-content-start">
+        <a href="{% url 'vehicle_insert' name %}"><button class="btn btn-outline-success">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+              </svg>
+              Add Vehicle
+              </button>
+           </a>
+           <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+           <button type="submit" class="btn btn-outline-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+             <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+             <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+           </svg>Logout</button>
+</form>
+</div>
+  </nav>
+<h1 class="display-4" style="text-align: center;">Vehicle Register</h1>
+<p class="lead font-italic" style="text-align: center;">Welcome {{name}} from {{company}}</p>
+<div style="background-color: aliceblue;">
+       <!--<table class="table table-borderless">
+           <thead class="border-bottom font-weight-bold">
+
+            <tr>
+                   <td style="font-weight: bold;">Vehicle Name</td>
+                   <td style="font-weight: bold;">Vehicle no</td>
+                   <td style="font-weight: bold;">Quality</td>
+                   <td style="font-weight: bold;">Vehicle Price</td>
+                   <td style="font-weight: bold;">Image</td>
+                   <td>
+                       <a href="{% url 'vehicle_insert' name %}"><button class="btn btn-outline-success">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                          </svg>
+                          Add Vehicle
+                          </button>
+                       </a>
+                   </td>
+                   <td>
+                   <form method="post" action="{% url 'logout' %}">
+                               {% csrf_token %}
+                              <button type="submit" class="btn btn-outline-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+                                <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                              </svg>Logout</button>
+                   </form>
+                   </td>
+               </tr>
+
+           </thead>
+           <tbody>
+               {% for veh in vehicle_list %}
+
+                          <tr style="background-color: white;">
+                              <td style="font-size:20px;font-weight: 300;">{{veh.name}}</td>
+                              <td style="font-size:20px;font-weight: 300;">{{veh.vehicle_code}}</td>
+                              <td style="font-size:20px;font-weight: 300;">{{veh.quality}}</td>
+                              <td style="font-size:20px;font-weight: 300;">{{veh.vehicle_price}}</td>
+
+                                  {% if veh.image %}
+
+                                  <td><img src="{{ veh.image.url }}" alt="" class="img-thumbnail" style="width:150px;height: 100px;"></td>
+                                  {% else %}
+                                  <td>No images</td>
+                                  {% endif %}
+                              <td style="position:absolute;margin-top: 30px;">
+                                  <a href="{% url 'vehicle_update' veh.username veh.id %}" class=""><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                    <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                                  </svg></a>
+                                  <form action="{% url 'vehicle_delete' veh.username veh.id %}" method="post" class="d-inline">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                                  </svg></button></form>
+                              </td>
+                          </tr>
+
+               {% endfor %}
+           </tbody>
+       </table> -->
+       <div class="row">
+        {% for veh in vehicle_list %}
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       <div class="card" style="width: 18rem;margin-top: 50px;">
+        <img src="{{ veh.image.url }}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{veh.name}}</h5>
+          <p class="card-text">Rupees:{{veh.vehicle_price}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Code:{{veh.vehicle_code}}</li>
+          <li class="list-group-item">Quality:{{veh.quality}}</li>
+        </ul>
+        {% ifequal veh.username name %}
+        <div class="card-body" style="display: inline-block;">
+            <a href="{% url 'vehicle_update' name veh.id %}" class=""><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+              </svg></a>
+
+              <form action="{% url 'vehicle_delete' name veh.id %}" method="post" class="d-inline">
+                {% csrf_token %}
+                <button type="submit" class="btn"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+              </svg></button></form>
+        </div>
+        {% endifequal %}
+      </div>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+     {% endfor %}
+
+
+
+       </div>
+       </div>
+{% endblock content %}

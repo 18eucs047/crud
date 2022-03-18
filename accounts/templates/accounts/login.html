@@ -1,0 +1,40 @@
+{% extends 'accounts/base.html' %}
+
+
+
+{% block content %}
+
+
+
+
+{% if error %}
+<h2 style="text-align: center;">{{ error }}</h2>
+
+<br/>
+<br/>
+{% endif %}
+
+
+<div style="position: absolute;margin-top: 150px;margin-left: 400px;">
+    <h1>Login!</h1>
+    <form method = "POST" action="{% url 'login' %}">
+    {% csrf_token %}
+    username:
+    <br/>
+    <input type="text" name="username" required/>
+    <br/>
+    Password:
+    <br/>
+    <input type="password" name="password" required minlength="8"/>
+    <br/>
+    <input class ="btn btn-primary" type="submit" value= "Login" />
+    <br/>
+
+
+
+</form>
+
+<a href="{% url 'reset' %}"><button class="btn btn-outline-success">Reset Password</button></a>
+<a href="{% url 'signup' %}"><button class="btn btn-outline-danger">Signup</button></a>
+</div>
+{% endblock %}
